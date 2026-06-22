@@ -8,8 +8,8 @@
  */
 
 // Numero do WhatsApp em formato internacional, apenas digitos (DDI 55 + DDD + numero).
-// PLACEHOLDER — substituir pelo numero real da academia.
-export const WHATSAPP_NUMBER = "5531999999999";
+// FICTICIO — substituir pelo numero real da academia.
+export const WHATSAPP_NUMBER = "5531988776655";
 
 // Mensagem pre-preenchida exigida na spec.
 export const WHATSAPP_MESSAGE =
