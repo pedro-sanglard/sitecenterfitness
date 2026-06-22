@@ -1,0 +1,89 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* Compensa o header fixo ao navegar por ancoras */
+    scroll-padding-top: 80px;
+  }
+
+  body {
+    @apply bg-surface text-ink font-sans;
+  }
+
+  /* Altura de linha de 150% para todos os paragrafos (legibilidade / publico senior) */
+  p {
+    line-height: 1.5;
+  }
+
+  /* Cabecalhos na cor de marca */
+  h1,
+  h2 {
+    @apply text-brand;
+  }
+
+  /* Foco visivel para acessibilidade (teclado) */
+  a:focus-visible,
+  button:focus-visible,
+  summary:focus-visible {
+    outline: 3px solid #2a2f47;
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}
+
+@layer components {
+  /* Garante area de toque minima de 44x44px (Lei de Fitts / WCAG AA) */
+  .touch-target {
+    @apply inline-flex items-center justify-center;
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Botao CTA principal: elevacao e transicao de opacidade no hover/toque */
+  .btn-cta {
+    @apply touch-target bg-brand text-white font-semibold rounded-lg px-6 py-3;
+    @apply shadow-cta transition-all duration-200 ease-in-out;
+  }
+  .btn-cta:hover,
+  .btn-cta:focus-visible {
+    @apply shadow-cta-hover opacity-95 -translate-y-0.5;
+  }
+
+  /* Container padrao das secoes */
+  .section-container {
+    @apply mx-auto w-full max-w-6xl px-4;
+  }
+}
+
+@layer utilities {
+  /* Scroll reveal: estado inicial escondido + revelado (controlado via IntersectionObserver) */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    will-change: opacity, transform;
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Respeita usuarios que preferem menos movimento */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
+  * {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
